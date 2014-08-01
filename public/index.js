@@ -100,7 +100,7 @@ var badwords = require("badwords/regexp");
 var loadScores = function(globalScores, localScores) {
     console.log(globalScores);
     console.log(localScores);
-     container.innerHTML = leaderboardTemplate({
+     main.innerHTML = leaderboardTemplate({
         score:score,
         oldWord:oldWord,
         globalScores:globalScores,
@@ -146,7 +146,9 @@ var loadScores = function(globalScores, localScores) {
     if(start) {
     start.addEventListener("click", function() {
         score = 0;
-       loadLevel(0); 
+        lives = 3;
+        oldWord = "";
+       loadLevel(1); 
     });
     }
 };
@@ -902,7 +904,7 @@ module.exports = Handlebars.template({"1":function(depth0,helpers,partials,data)
     + escapeExpression(((helper = helpers.word || (depth0 && depth0.word)),(typeof helper === functionType ? helper.call(depth0, {"name":"word","hash":{},"data":data}) : helper)))
     + "?type=wav\" type=\"audio/wav\">\n        </audio>\n    ";
 },"compiler":[5,">= 2.0.0"],"main":function(depth0,helpers,partials,data) {
-  var stack1, helper, functionType="function", escapeExpression=this.escapeExpression, buffer = "<div class=\"row\">\n<div class=\"col-md-6\">\n<h3>Lives: <span class=\"label label-warning\">"
+  var stack1, helper, functionType="function", escapeExpression=this.escapeExpression, buffer = "		<div class=\"row\">\n			<div class=\"col-md-6 col-md-offset-3\">\n<div class=\"row\">\n<div class=\"col-md-6\">\n<h3>Lives: <span class=\"label label-warning\">"
     + escapeExpression(((helper = helpers.lives || (depth0 && depth0.lives)),(typeof helper === functionType ? helper.call(depth0, {"name":"lives","hash":{},"data":data}) : helper)))
     + "</span></h3>\n</div>\n<div class=\"col-md-6 text-right\">\n    <h3>Score: <span class=\"label label-success\" style=\"margin-top:-0.2em; vertical-align:middle\">"
     + escapeExpression(((helper = helpers.score || (depth0 && depth0.score)),(typeof helper === functionType ? helper.call(depth0, {"name":"score","hash":{},"data":data}) : helper)))
@@ -915,7 +917,7 @@ module.exports = Handlebars.template({"1":function(depth0,helpers,partials,data)
   buffer += "\n    ";
   stack1 = helpers.unless.call(depth0, (depth0 && depth0.modernBrowser), {"name":"unless","hash":{},"fn":this.program(5, data),"inverse":this.noop,"data":data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  return buffer + "\n    <br/>\n    <br/>\n    <input style=\"\" class=\"form-control\" type=\"text\" id=\"answer\"/>\n</div>\n<br/>\n<button class=\"btn btn-primary\" id=\"submit\">\n    Submit\n    <i class=\"fa fa-chevron-right\"></i>\n</button>\n</div>\n</div>";
+  return buffer + "\n    <br/>\n    <br/>\n    <input style=\"\" class=\"form-control\" type=\"text\" id=\"answer\"/>\n</div>\n<br/>\n<button class=\"btn btn-primary\" id=\"submit\">\n    Submit\n    <i class=\"fa fa-chevron-right\"></i>\n</button>\n</div>\n</div>\n		<div class=\"row\">\n			<div class=\"col-md-6 col-md-offset-3\">";
 },"useData":true});
 
 },{"hbsfy/runtime":10}]},{},[1]);
