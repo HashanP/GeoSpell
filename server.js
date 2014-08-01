@@ -35,6 +35,12 @@ router.use(bodyParser.urlencoded());
 var API_KEY = "009057c6287f8c80a49053c3c8c2da500b6abb3f9a925a737";
 
 router.get("/", function(req, res) {
+  console.log(req.query);
+  if(req.query.lang) {
+    req.session.lang = req.query.lang;
+  } else {
+    delete req.session.lang;
+  }
   res.end(homePage);
 });
 
@@ -54,7 +60,35 @@ router.get("/words/:level", function(req, res) {
             ret.push(body[i].word);
         }
         console.log(ret);
-        res.json(ret);
+        console.log(req.session.lang);
+        if(req.session.lang) {
+          request.post({
+            url:"https://datamarket.accesscontrol.windows.net/v2/OAuth2-13/",
+            form: {
+              client_id:"GeoSpell",
+              client_secret:"Ih3WEJAkSf9oMC0RxhvXoaYFyypiq8BWw7s0lXKu+O4=",
+              scope:"http://api.microsofttranslator.com",
+              grant_type:"client_credentials"
+            }
+          },
+          function(err, fds, body) {
+            
+            body = JSON.parse(body);
+             request.get({
+            url: "http://api.microsofttranslator.com/V2/Http.svc/Translate?Text=" + ret.join(",") + "&To=" + req.session.lang + "&From=en"
+            ,headers: {
+              Authorization: "Bearer " + body.access_token
+            }
+          }, function(err, resp, body) {
+            body = body.substring(68, body.length -9);
+            console.log(body);
+            res.json(body.split(","));
+          }); 
+          });
+         
+        } else {
+          res.json(ret);
+        }
     }); 
 });
 

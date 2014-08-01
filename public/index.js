@@ -23,6 +23,13 @@ var getWords = function(level, cb) {
     });
 }
 
+var getParameterByName = function (name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
 var modernBrowser = SpeechSynthesisUtterance !== undefined;
 
 var loadQuestion = function() {
@@ -43,7 +50,9 @@ var loadQuestion = function() {
             msg.voice = voices[1]; // Note: some voices don't support altering params
             msg.voiceURI = 'native';
             msg.text = currentWord;
-            msg.lang = 'en-GB';
+            console.log(getParameterByName("lang"));
+            msg.lang = getParameterByName("lang") || 'en-GB';
+            console.log(msg.lang);
             msg.volume = 1;
             speechSynthesis.speak(msg);
         };
