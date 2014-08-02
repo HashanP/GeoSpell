@@ -43,15 +43,27 @@ var loadQuestion = function() {
         county:county
     });
     if(modernBrowser) {
+        var lang = getParameterByName("lang");
         var player = document.getElementById("player");
         var speak = function() {
             var msg = new SpeechSynthesisUtterance();
             var voices = window.speechSynthesis.getVoices();
-            msg.voice = voices[1]; // Note: some voices don't support altering params
             msg.voiceURI = 'native';
             msg.text = currentWord;
-            console.log(getParameterByName("lang"));
-            msg.lang = getParameterByName("lang") || 'en-GB';
+            msg.lang = lang || 'en-GB';
+            if(msg.lang === "fr") {
+                msg.voice = voices[4];
+            } else if(msg.lang === "de") {
+                msg.voice = voices[6];
+            } else if(msg.lang === "it") {
+                msg.voice = voices[5]; 
+            } else if(msg.lang === "zh-CHS") {
+                msg.voice = voices[9];
+            } else if(msg.lang === "es") {
+                msg.vocie = voices[3];
+            } else {
+                msg.voice = voices[1]; // Note: some voices don't support altering params
+            }
             console.log(msg.lang);
             msg.volume = 1;
             speechSynthesis.speak(msg);
