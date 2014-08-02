@@ -33,6 +33,8 @@ var getParameterByName = function (name) {
 var modernBrowser = SpeechSynthesisUtterance !== undefined;
 
 var loadQuestion = function() {
+    var lang = getParameterByName("lang");
+    var m = modernBrowser && (lang === undefined || lang === "de" || lang === "it" || lang === "zh-CHS" || lang === "zh-CHT" || lang === "es");
     mainFrame.innerHTML = questionTemplate({
         word:currentWord, 
         modernBrowser:modernBrowser, 
@@ -42,8 +44,8 @@ var loadQuestion = function() {
         lives:lives,
         county:county
     });
-    if(modernBrowser) {
-        var lang = getParameterByName("lang");
+    console.log(lang);
+    if(m) {
         var player = document.getElementById("player");
         var speak = function() {
             var msg = new SpeechSynthesisUtterance();
@@ -57,7 +59,7 @@ var loadQuestion = function() {
                 msg.voice = voices[6];
             } else if(msg.lang === "it") {
                 msg.voice = voices[5]; 
-            } else if(msg.lang === "zh-CHS") {
+            } else if(msg.lang === "zh-CHS" || msg.lang === "zh-CHT") {
                 msg.voice = voices[9];
             } else if(msg.lang === "es") {
                 msg.vocie = voices[3];
