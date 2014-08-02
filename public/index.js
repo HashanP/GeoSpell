@@ -34,10 +34,10 @@ var modernBrowser = SpeechSynthesisUtterance !== undefined;
 
 var loadQuestion = function() {
     var lang = getParameterByName("lang");
-    var m = modernBrowser && (lang === undefined || lang === "de" || lang === "it" || lang === "zh-CHS" || lang === "zh-CHT" || lang === "es");
+    var m = modernBrowser && (lang === "" || lang === "de" || lang === "it" || lang === "zh-CHS" || lang === "zh-CHT" || lang === "es");
     mainFrame.innerHTML = questionTemplate({
         word:currentWord, 
-        modernBrowser:modernBrowser, 
+        modernBrowser:m, 
         score:score,
         wrong:wrong,
         oldWord:oldWord,
