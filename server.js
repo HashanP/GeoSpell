@@ -119,7 +119,7 @@ router.get("/speech/:word", function(req, res) {
       }
 });
 
-var client = redis.createClient(16181, "pub-redis-16181.us-east-1-2.1.ec2.garantiadata.com");
+var client = redis.createClient(16181, process.env["REDISTOGO_URL"]);
 
 router.get("/leaderboard/:board", function(req, res) {
   client.zrevrange(req.params.board, 0, req.query.end || 9, "WITHSCORES", function(err, keys) {
