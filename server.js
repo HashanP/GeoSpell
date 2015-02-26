@@ -19,7 +19,7 @@ var homePage = handlebars.compile(fs.readFileSync("./public/index.hbs").toString
   countries: countries.all
 });
 var vorbis = require("vorbis");
-var ogg = require("ogg");
+//var ogg = require("ogg");
 var lame = require("lame"); // for MP3
 var wav = require("wav"); // for WAVE files
 //
@@ -99,7 +99,7 @@ router.get("/speech/:word", function(req, res) {
       if(req.query.type === "mp3") {
         mp3.pipe(res);
       } else if(req.query.type === "ogg") {
-        var mp3Decoder = new lame.Decoder();
+      /*  var mp3Decoder = new lame.Decoder();
         mp3.pipe(mp3Decoder);
 
         mp3Decoder.on("format", function() {
@@ -110,7 +110,7 @@ router.get("/speech/:word", function(req, res) {
           vorbisEncoder.pipe(oggEncoder.stream());
    
           oggEncoder.pipe(res);
-        });
+        });*/
       } else if(req.query.type === "wav") {
         mp3
           .pipe(lame.Decoder())
