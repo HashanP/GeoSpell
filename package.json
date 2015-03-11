@@ -19,7 +19,8 @@
     "badwords": "0.0.3",
     "jsonld": "^0.3.1",
     "country-data": "0.0.13",
-    "handlebars": "^2.0.0-alpha.4"
+    "handlebars": "^2.0.0-alpha.4",
+    "redis-url": "^0.3.1"
   },
   "devDependencies": {
     "gulp": "^3.8.6",

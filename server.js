@@ -24,7 +24,7 @@ var lame = require("lame"); // for MP3
 var wav = require("wav"); // for WAVE files
 //
 
-var redis = require("redis");
+var redis = require("redis-url");
 var router = express();
 
 router.use(express.static(path.resolve(__dirname, "public")));
@@ -119,7 +119,8 @@ router.get("/speech/:word", function(req, res) {
       }
 });
 
-var client = redis.createClient(16181, process.env["REDISTOGO_URL"]);
+//var client = redis.createClient(6379, "localhost");
+var client = redis.createClient(process.env["REDISTOGO_URL"]);
 
 router.get("/leaderboard/:board", function(req, res) {
   client.zrevrange(req.params.board, 0, req.query.end || 9, "WITHSCORES", function(err, keys) {
@@ -201,4 +202,7 @@ router.get("/postcode/:postcode", function(req, res) {
   });
 });
 
-http.createServer(router).listen(process.env.PORT, process.env.IP);
+http.createServer(router).listen(process.env.PORT, function() {
+  console.log(process.env.PORT);
+  console.log(process.env.IP);
+});
