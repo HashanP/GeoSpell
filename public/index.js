@@ -34,7 +34,7 @@ var modernBrowser = SpeechSynthesisUtterance !== undefined;
 
 var loadQuestion = function() {
     var lang = getParameterByName("lang");
-    var m = modernBrowser && (lang === "" || lang === "de" || lang === "it" || lang === "zh-CHS" || lang === "zh-CHT" || lang === "es");
+    var m = modernBrowser && (lang === "" || lang === "fr" || lang === "de" || lang === "it" || lang === "zh-CHS" || lang === "zh-CHT" || lang === "es");
     mainFrame.innerHTML = questionTemplate({
         word:currentWord, 
         modernBrowser:m, 
@@ -77,7 +77,7 @@ var loadQuestion = function() {
         var answer = document.getElementById("answer");
         answer.focus(); // Autofocus
         var s = function() {
-            if(answer.value.toLowerCase() === currentWord.toLowerCase()) {
+            if(answer.value.toLowerCase().replace(/-/g, '') === currentWord.toLowerCase().replace(/-/g, '')) {
                 score += 5;
                 wrong = false;
             } else {
