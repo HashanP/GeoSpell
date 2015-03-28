@@ -19,7 +19,7 @@ var homePage = handlebars.compile(fs.readFileSync("./public/index.hbs").toString
   countries: countries.all
 });
 var vorbis = require("vorbis");
-//var ogg = require("ogg");
+var ogg = require("ogg");
 var lame = require("lame"); // for MP3
 var wav = require("wav"); // for WAVE files
 //
