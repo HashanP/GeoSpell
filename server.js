@@ -51,7 +51,7 @@ router.get("/words/:level", function(req, res) {
     for(var key in level) {
         url += key + "=" + level[key] + "&";
     }
-    url += "limit=5&hasDictionaryDef=true&excludePartOfSpeech=proper-noun,given-name,family-name";
+    url += "limit=10&hasDictionaryDef=true&excludePartOfSpeech=proper-noun,given-name,family-name";
     console.log(url);
     request.get(url, function(err, resp, body) {
       body = JSON.parse(body);

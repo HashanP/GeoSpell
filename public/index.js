@@ -85,7 +85,7 @@ var loadQuestion = function() {
                 lives--;
                 oldWord = currentWord;
             }
-            part = ++part % 5;
+            part = ++part % 10;
             console.log(part);
             currentWord = words[part];
             if(lives > 0) {
@@ -239,19 +239,11 @@ startButton.addEventListener("click", function(e) {
     } else if(ageValue === 9) {
         level = 2;
     } else if(ageValue === 10) {
-        level = 3;
+        level = 2;
     } else if(ageValue === 11) {
-        level = 4;
-    } else if(ageValue === 12) {
+        level = 2;
+    } else {
         level = 5;
-    } else if(ageValue === 13) {
-        level = 6;
-    } else if(ageValue === 14) {
-        level = 7; 
-    } else if(ageValue === 15) {
-        level = 8;
-    } else if (ageValue >= 16) {
-        level = 9;
     } 
     if(!invalid) {
     }
