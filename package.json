@@ -31,8 +31,5 @@
   },
   "scripts": {
     "build": "browserify -t hbsfy client.js > public/index.js"
-  },
-  "engines": {
-    "node": "0.10.x"
   }
 }
